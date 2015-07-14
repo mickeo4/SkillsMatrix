@@ -1,0 +1,27 @@
+
+<div class="panel panel-primary spacer">
+	<div class="panel-heading">Skills</div>
+	<div class="panel-body">
+		<a href="AddSkill" class="btn btn-primary pull-left">Add Skill</a>
+		<table class="table table-responsive table-striped">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Description</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="skill in vm.skills">
+					<td class="hidden">{{skill.Id}}</td>
+					<td>{{skill.Name}}</td>
+					<td>{{skill.Description}}</td>
+					<td class="text-right">
+						<a ng-click="vm.viewSkill(skill.Id)" class="btn btn-info">View</a>
+						<a ng-click="vm.editSkill(skill.Id)" class="btn btn-primary">Edit</a>
+					</td>
+				</tr>
+		</tbody>
+	</table>
+</div> 
+</div>
