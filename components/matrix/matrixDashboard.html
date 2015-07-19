@@ -1,4 +1,28 @@
-<accordion close-others="oneAtATime">
+<div>
+    <table ng-table="vm.tableParams" class="table table-responsive table-striped">
+        <tr>
+          <th>
+              <div style="-webkit-transform: rotate(270deg)">Name</div>
+          </th>
+        </tr>
+        <tr ng-repeat="user in $data">
+            <td width="80" id="container_2"7
+                <span>{{user.name}}</span>
+            </td>
+            <td data-title="">
+                <span ng-if="!user.$edit" ng-click="user.$edit = true">{{user.age}}</span>
+                <div class="col-xs-1" ng-if="user.$edit"><input class="form-control" type="number" ng-model="user.age" /></div>
+            </td>
+            <td data-title="" width="200">
+                <!-- <a ng-if="!user.$edit" href="" class="btn btn-default btn-xs" ng-click="user.$edit = true">Edit</a> -->
+                <a ng-if="user.$edit" href="" class="btn btn-primary btn-xs" ng-click="user.$edit = false">Save</a>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+<!-- <accordion close-others="oneAtATime">
   <accordion-group heading="Static Header, initially expanded" is-open="vm.status.isFirstOpen" is-disabled="vm.status.isFirstDisabled">
     This content is straight in the template.
   </accordion-group>
@@ -16,5 +40,4 @@
       </accordion-heading>
       This is just some content to illustrate fancy headings.
   </accordion-group>
-</accordion>
-<!-- Comment to test GitHub -->
+</accordion> -->

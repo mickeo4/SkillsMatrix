@@ -1,7 +1,9 @@
     // create the module and name it scotchApp
     angular.module('app', [
         'ngRoute',
-        'ui.bootstrap', 'ngAnimate',
+        'ui.bootstrap',
+        'ngAnimate',
+        'ngTable',
         'skills',
         'matrix'])
 
