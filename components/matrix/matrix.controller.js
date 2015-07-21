@@ -9,31 +9,74 @@
   function MatrixController(ngTableParams, $sce){
     var vm = this;
 
-    var data = [{name: "Moroni", age: 50},
-            {name: "Tiancum", age: 43},
-            {name: "Jacob", age: 27},
-            {name: "Nephi", age: 29},
-            {name: "Enos", age: 34},
-            {name: "Tiancum", age: 43},
-            {name: "Jacob", age: 27},
-            {name: "Nephi", age: 29},
-            {name: "Enos", age: 34},
-            {name: "Tiancum", age: 43},
-            {name: "Jacob", age: 27},
-            {name: "Nephi", age: 29},
-            {name: "Enos", age: 34},
-            {name: "Tiancum", age: 43},
-            {name: "Jacob", age: 27},
-            {name: "Nephi", age: 29},
-            {name: "Enos", age: 34}];
+    var skillset = {id:1, 
+                    Name:"Team Lead", 
+                    skills:[{id:1, name:"C#"}, 
+                            {id:2, name:"Design Patterns"}, 
+                            {id:3, name:"Javascript"}],
+                    employees:[{id: 1, name: "Mike", competencies:[{id:1, score:1, skillsetid:1, skillid:1}, 
+                                                                 {id:2, score:5, skillsetid:1, skillid:2}, 
+                                                                 {id:3, score:5, skillsetid:1, skillid:3}]}, 
+                               {id: 2, name: "John", competencies:[{id:1, score:2, skillsetid:1, skillid:1}, 
+                                                                 {id:2, score:4, skillsetid:1, skillid:2}, 
+                                                                 {id:3, score:2, skillsetid:1, skillid:3}]}, 
+                               {id: 1, name: "Chris", competencies:[{id:1, score:1, skillsetid:1, skillid:1}, 
+                                                                 {id:2, score:3, skillsetid:1, skillid:2}, 
+                                                                 {id:3, score:2, skillsetid:1, skillid:3}]}
+                              ]
+                   };
+
+    var employees = [{id: 1, name: "Mike", 
+                        skillset:{id: 1, name: "Team Lead", skills:[
+                        {id:1, name:"C#"}, 
+                        {id:2, name:"Design Patterns"}, 
+                        {id:3, name:"Javascript"}]}
+                    },
+                    {Id: 2, name: "John",
+                        skillset:{id: 1, name: "Team Lead", skills:[
+                        {id:1, name:"C#"}, 
+                        {id:2, name:"Design Patterns"}, 
+                        {id:3, name:"Javascript"}]}
+                    }];
+
+
+    vm.skillset = skillset;
+
+    // var data = [{name: "Moroni", age: 50},
+    //         {name: "Tiancum", age: 43},
+    //         {name: "Jacob", age: 27},
+    //         {name: "Nephi", age: 29},
+    //         {name: "Enos", age: 34},
+    //         {name: "Tiancum", age: 43},
+    //         {name: "Jacob", age: 27},
+    //         {name: "Nephi", age: 29},
+    //         {name: "Enos", age: 34},
+    //         {name: "Tiancum", age: 43},
+    //         {name: "Jacob", age: 27},
+    //         {name: "Nephi", age: 29},
+    //         {name: "Enos", age: 34},
+    //         {name: "Tiancum", age: 43},
+    //         {name: "Jacob", age: 27},
+    //         {name: "Nephi", age: 29},
+    //         {name: "Enos", age: 34}];
+
+        // vm.tableParams = new ngTableParams({
+        //     page: 1,            // show first page
+        //     count: 10           // count per page
+        // }, {
+        //     total: data.length, // length of data
+        //     getData: function($defer, params) {
+        //         $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        //     }
+        // });
 
         vm.tableParams = new ngTableParams({
             page: 1,            // show first page
             count: 10           // count per page
         }, {
-            total: data.length, // length of data
+            total: vm.skillset.employees.length, // length of data
             getData: function($defer, params) {
-                $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                $defer.resolve(vm.skillset.employees.slice((params.page() - 1) * params.count(), params.page() * params.count()));
             }
         });
   };

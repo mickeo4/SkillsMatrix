@@ -1,26 +1,38 @@
 <div>
-    <table ng-table="vm.tableParams" class="table table-responsive table-striped">
-        <tr>
-          <th>
-              <div style="-webkit-transform: rotate(270deg)">Name</div>
-          </th>
-        </tr>
-        <tr ng-repeat="user in $data">
-            <td width="80" id="container_2"7
-                <span>{{user.name}}</span>
-            </td>
-            <td data-title="">
-                <span ng-if="!user.$edit" ng-click="user.$edit = true">{{user.age}}</span>
-                <div class="col-xs-1" ng-if="user.$edit"><input class="form-control" type="number" ng-model="user.age" /></div>
-            </td>
-            <td data-title="" width="200">
-                <!-- <a ng-if="!user.$edit" href="" class="btn btn-default btn-xs" ng-click="user.$edit = true">Edit</a> -->
-                <a ng-if="user.$edit" href="" class="btn btn-primary btn-xs" ng-click="user.$edit = false">Save</a>
-            </td>
-        </tr>
-    </table>
-
+  Search Employees: <input ng-model="query">
 </div>
+
+<div class="scrollable-table">
+  <table class="table table-striped table-responsive table-header-rotated">
+    <thead>
+      <tr>
+        <!-- First column header is not rotated -->
+        <th>Employee</th>
+        <!-- Following headers are rotated -->
+        <th ng-repeat="skill in vm.skillset.skills" class="rotate-45">
+          <div>
+            <span>{{skill.name}}</span>
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="employee in vm.skillset.employees | filter:query">
+        <th class="row-header">{{employee.name}}</th>
+        <td ng-repeat="competency in employee.competencies">
+          <span class="col-xs-1" ng-if="!competency.$edit" ng-click="competency.$edit = true">{{competency.score}}</span>
+          <div class="col-xs-1" ng-if="competency.$edit">
+            <input class="form-control" type="number" ng-model="competency.score" />
+          </div>
+        </td>
+        <td>
+          <a ng-if="competency.$edit" href="" class="btn btn-primary btn-xs" ng-click="competency.$edit = false">Save</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 
 <!-- <accordion close-others="oneAtATime">
   <accordion-group heading="Static Header, initially expanded" is-open="vm.status.isFirstOpen" is-disabled="vm.status.isFirstDisabled">
