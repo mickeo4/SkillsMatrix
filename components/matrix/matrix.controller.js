@@ -2,7 +2,7 @@
 
   'use strict';
 
-  angular.module('matrix', ['ngRoute', 'matrixRoutes'])
+  angular.module('matrix', ['ngRoute', 'matrixRoutes', 'chart.js'])
 
   .controller('MatrixController', MatrixController);
 
@@ -26,59 +26,35 @@
                               ]
                    };
 
-    var employees = [{id: 1, name: "Mike", 
-                        skillset:{id: 1, name: "Team Lead", skills:[
-                        {id:1, name:"C#"}, 
-                        {id:2, name:"Design Patterns"}, 
-                        {id:3, name:"Javascript"}]}
-                    },
-                    {Id: 2, name: "John",
-                        skillset:{id: 1, name: "Team Lead", skills:[
-                        {id:1, name:"C#"}, 
-                        {id:2, name:"Design Patterns"}, 
-                        {id:3, name:"Javascript"}]}
-                    }];
-
-
     vm.skillset = skillset;
 
-    // var data = [{name: "Moroni", age: 50},
-    //         {name: "Tiancum", age: 43},
-    //         {name: "Jacob", age: 27},
-    //         {name: "Nephi", age: 29},
-    //         {name: "Enos", age: 34},
-    //         {name: "Tiancum", age: 43},
-    //         {name: "Jacob", age: 27},
-    //         {name: "Nephi", age: 29},
-    //         {name: "Enos", age: 34},
-    //         {name: "Tiancum", age: 43},
-    //         {name: "Jacob", age: 27},
-    //         {name: "Nephi", age: 29},
-    //         {name: "Enos", age: 34},
-    //         {name: "Tiancum", age: 43},
-    //         {name: "Jacob", age: 27},
-    //         {name: "Nephi", age: 29},
-    //         {name: "Enos", age: 34}];
+    vm.labels =["C#", "Javascript", "Design Patterns", "CI", "Entity Framework", "Dependency Injection", "Angular JS", "Type Script", "Java"];
 
-        // vm.tableParams = new ngTableParams({
-        //     page: 1,            // show first page
-        //     count: 10           // count per page
-        // }, {
-        //     total: data.length, // length of data
-        //     getData: function($defer, params) {
-        //         $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-        //     }
-        // });
+    vm.data = [
+      [1, 3, 1, 4, 5, 5, 3, 1, 5]
+    ];
 
-        vm.tableParams = new ngTableParams({
-            page: 1,            // show first page
-            count: 10           // count per page
-        }, {
-            total: vm.skillset.employees.length, // length of data
-            getData: function($defer, params) {
-                $defer.resolve(vm.skillset.employees.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-            }
-        });
+   
+    vm.tableParams = new ngTableParams({
+        page: 1,            // show first page
+        count: 10           // count per page
+    }, {
+        total: vm.skillset.employees.length, // length of data
+        getData: function($defer, params) {
+            $defer.resolve(vm.skillset.employees.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+        }
+    });
+
+    vm.resetEdit = function (employees) {
+        for (var i = 0, len = employees.length; i < len; i++) {
+          var employee = employees[i];
+          employee.$editing = false;
+
+          for (var j = 0, len = employee.competencies.length; j < len; j++){
+              employee.competencies[j].$editing = false;
+          }
+        }
+    };
   };
 })();
 
