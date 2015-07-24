@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('skillsRoutes', ['ngRoute', 'skillsService'])
-		.config(['$routeProvider', function($routeProvider, SkillsService){
+		.config(['$routeProvider', function($routeProvider, SkillsService, $routeParams){
 			//alert(skillsService);
 			$routeProvider
             	// route for the skills list page
@@ -22,8 +22,8 @@
                 	controller  : 'SkillsController',
                 	controllerAs: 'vm',
                 	resolve: {
-            			skillsData : function(SkillsService){
-            				return SkillsService.getSkill();
+            			skillsData : function(SkillsService, $route){
+            				return SkillsService.getSkill($route.current.params.id);
             			}
         			}
             	})
@@ -33,8 +33,8 @@
                 	controller  : 'SkillsController',
                 	controllerAs: 'vm',
                 	resolve: {
-            			skillsData : function(SkillsService){
-            				return SkillsService.getSkill();
+            			skillsData : function(SkillsService, $route){
+            				return SkillsService.getSkill($route.current.params.id);
             			}
         			}
             	})

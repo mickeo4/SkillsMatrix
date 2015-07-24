@@ -1,0 +1,52 @@
+<div class="container-fluid">
+    <div class="row" ng-controller="CompetencyKeyController as vmCompetencyKey">
+      <div class="col-lg-3">
+            <div ng-include="'/components/competency/competencyKey.html'"></div>
+        </div>
+    </div>
+    <div class="row" ng-controller="MatrixController as vmMatrix">
+        <div class="col-lg-12">
+          <div class="panel panel-primary horizontal-spacer">
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title">Employee Competency</h3>
+            </div>
+            <div class="scrollable-table">
+              <table class="table table-hover table-striped table-condensed table-responsive table-header-rotated vertical-spacer">
+                <thead>
+                  <tr class="filters" ng-show="vmMatrix.filterable">
+                    <th>
+                      <input type="text" class="form-control" placeholder="Employee Name" ng-model="vmMatrix.queryName">
+                    </th>
+                  </tr>
+                  <tr>
+                    <!-- First column header is not rotated -->
+                    <th>Employee</th>
+                    <!-- Following headers are rotated -->
+                    <th ng-repeat="skill in vmMatrix.skillset.skills" class="rotate-45">
+                      <div>
+                        <span>{{skill.name}}</span>
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="employee in vmMatrix.skillset.employees | filter:vmMatrix.queryName | orderBy:orderProp">
+                    <th class="row-header">
+                      <a href='./matrix/detail'><span class='glyphicon glyphicon-info-sign'></span></a>
+                      {{employee.name}}
+                    </th>
+                    <td ng-repeat="competency in employee.competencies">
+                      <span class="col-xs-1" ng-show="!competency.$editing" ng-click="vmMatrix.resetEdit(vmMatrix.skillset.employees); competency.$editing = true; $parent.employee.$editing = true" ng-cloack>{{competency.score}}</span>
+                      <input class="form-control" ng-show="competency.$editing" ng-model="competency.score" ng-cloack />
+                    </td>
+                    <td ng-show="employee.$editing">
+                      <a href="" class="btn btn-primary btn-xs">Save</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

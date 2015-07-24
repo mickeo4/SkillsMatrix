@@ -25,15 +25,13 @@
 			return{
         		getAllSkills : true,
             	skillsList : angular.fromJson(temp.skills),
-            	skill : null,
          	};
 		}
 
-		function getSkill(){
+		function getSkill(id){
 			return{
         		getAllSkills : false,
-            	skillsList : null,
-            	skill : angular.fromJson({"Id":"1", "Name":"MVC", "Description":"Model View Controller"}),
+            	skill : temp.skills[parseInt(id) - 1],
          	};
 		}
 	};

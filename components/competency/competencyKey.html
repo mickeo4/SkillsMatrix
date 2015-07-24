@@ -1,0 +1,16 @@
+<div class="panel panel-primary horizontal-spacer">
+  <div class="panel-heading clearfix">
+    <h5 class="panel-title">Competency Key</h5>
+  </div>
+  <table>
+    <tbody>
+      <tr ng-repeat="key in vmCompetencyKey.competencyKeys">
+        <td class="col-xs-1" ng-style="{'background-color':'{{key.keyStyle}}'}">
+          <span>{{key.value}}</span>
+        </td>
+        <td class="col-xs-4">
+          <span>{{key.title}}</span>
+        </td>
+      </tbody>
+    </table>
+  </div>
