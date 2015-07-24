@@ -5,7 +5,8 @@
         'ngAnimate',
         'ngTable',
         'skills',
-        'matrix'])
+        'matrix',
+        'competency'])
 
     // configure our routes
     .config(function($routeProvider, $locationProvider) {

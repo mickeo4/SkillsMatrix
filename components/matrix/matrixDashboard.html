@@ -1,53 +1,79 @@
-<div class="panel panel-primary horizontal-spacer">
-  <div class="panel-heading clearfix">
-    <h3 class="panel-title">Employee Competencies</h3>
-    <div class="pull-right">
-      <button class="btn btn-default btn-xs btn-filter" ng-click="vm.filterable=!vm.filterable; vm.queryName = null;"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-    </div>
-  </div>
-  <div class="scrollable-table">
-    <table class="table table-striped table-condensed  table-responsive table-header-rotated vertical-spacer">
-      <thead>
-        <tr class="filters" ng-show="vm.filterable">
-          <th>
-            <input type="text" class="form-control" placeholder="Employee Name" ng-model="vm.queryName">
-          </th>
-        </tr>
-        <tr>
-          <!-- First column header is not rotated -->
-          <th>Employee</th>
-          <!-- Following headers are rotated -->
-          <th ng-repeat="skill in vm.skillset.skills" class="rotate-45">
-            <div>
-              <span>{{skill.name}}</span>
+<div class="container-fluid">
+    <div class="row" ng-controller="CompetencyKeyController as vmCompetencyKey">
+      <div class="col-lg-3">
+            <div class="panel panel-primary horizontal-spacer">
+              <div class="panel-heading clearfix">
+                <h5 class="panel-title">Competency Key</h5>
+              </div>
+                <table>
+                  <tbody>
+                    <tr ng-repeat="key in vmCompetencyKey.competencyKeys">
+                      <td class="col-xs-1" ng-style="{'background-color':'{{key.keyStyle}}'}">
+                        <span>{{key.value}}</span>
+                      </td>
+                      <td class="col-xs-4">
+                        <span>{{key.title}}</span>
+                      </td>
+                  </tbody>
+                </table>
             </div>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="employee in vm.skillset.employees | filter:vm.queryName | orderBy:orderProp">
-          <th class="row-header">{{employee.name}}</th>
-          <td ng-repeat="competency in employee.competencies">
-            <span class="col-xs-1" ng-show="!competency.$editing" ng-click="vm.resetEdit(vm.skillset.employees); competency.$editing = true; $parent.employee.$editing = true" ng-cloack>{{competency.score}}</span>
-            <input class="form-control" ng-show="competency.$editing" ng-model="competency.score" ng-cloack />
-          </td>
-          <td ng-show="employee.$editing">
-            <a href="" class="btn btn-primary btn-xs">Save</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+        </div>
+    </div>
+    <div class="row" ng-controller="MatrixController as vmMatrix">
+        <div class="col-lg-12">
+          <div class="panel panel-primary horizontal-spacer">
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title">Employee Competencies</h3>
+              <div class="pull-right">
+                <button class="btn btn-default btn-xs btn-filter" ng-click="vmMatrix.filterable=!vmMatrix.filterable; vmMatrix.queryName = null;"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+              </div>
+            </div>
+            <div class="scrollable-table">
+              <table class="table table-hover table-striped table-condensed table-responsive table-header-rotated vertical-spacer">
+                <thead>
+                  <tr class="filters" ng-show="vmMatrix.filterable">
+                    <th>
+                      <input type="text" class="form-control" placeholder="Employee Name" ng-model="vmMatrix.queryName">
+                    </th>
+                  </tr>
+                  <tr>
+                    <!-- First column header is not rotated -->
+                    <th>Employee</th>
+                    <!-- Following headers are rotated -->
+                    <th ng-repeat="skill in vmMatrix.skillset.skills" class="rotate-45">
+                      <div>
+                        <span>{{skill.name}}</span>
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="employee in vmMatrix.skillset.employees | filter:vmMatrix.queryName | orderBy:orderProp">
+                    <th class="row-header">{{employee.name}}</th>
+                    <td ng-repeat="competency in employee.competencies">
+                      <span class="col-xs-1" ng-show="!competency.$editing" ng-click="vmMatrix.resetEdit(vmMatrix.skillset.employees); competency.$editing = true; $parent.employee.$editing = true" ng-cloack>{{competency.score}}</span>
+                      <input class="form-control" ng-show="competency.$editing" ng-model="competency.score" ng-cloack />
+                    </td>
+                    <td ng-show="employee.$editing">
+                      <a href="" class="btn btn-primary btn-xs">Save</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+    </div>
 </div>
 
-<div class="col-lg-6 col-sm-12">
+<!-- <div class="col-lg-6 col-sm-12">
 <div class="panel panel-default">
   <div class="panel-heading">Radar Chart</div>
     <div class="panel-body">
       <canvas id="radar" class="chart chart-radar" data="vm.data" labels="vm.labels"></canvas>
     </div>
 </div>
-</div>
+</div> -->
 
 
 

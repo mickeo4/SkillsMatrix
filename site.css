@@ -30,6 +30,11 @@ textarea {
 
 /** Rotated column header table **/
 
+.scrollable-table{
+    margin-right: 80px;
+    margin-left: 80px;
+}
+
 .table-header-rotated th.row-header{
   width: auto;
 }
