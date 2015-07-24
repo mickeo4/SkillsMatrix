@@ -18,8 +18,11 @@ textarea {
     max-width: 280px;
 }
 
-.spacer{
+.vertical-pacer{
     margin-top: 60px;
+}
+
+.horizontal-spacer{
     margin-right: 20px;
     margin-left: 20px;
 }
