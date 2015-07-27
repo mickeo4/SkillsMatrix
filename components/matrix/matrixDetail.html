@@ -13,11 +13,6 @@
             <div class="scrollable-table">
               <table class="table table-hover table-striped table-condensed table-responsive table-header-rotated vertical-spacer">
                 <thead>
-                  <tr class="filters" ng-show="vmMatrix.filterable">
-                    <th>
-                      <input type="text" class="form-control" placeholder="Employee Name" ng-model="vmMatrix.queryName">
-                    </th>
-                  </tr>
                   <tr>
                     <!-- First column header is not rotated -->
                     <th>Employee</th>
@@ -30,13 +25,12 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="employee in vmMatrix.skillset.employees | filter:vmMatrix.queryName | orderBy:orderProp">
+                  <tr>
                     <th class="row-header">
-                      <a href='./matrix/detail'><span class='glyphicon glyphicon-info-sign'></span></a>
-                      {{employee.name}}
+                      {{vmMatrix.skillset.employees[0].name}}
                     </th>
-                    <td ng-repeat="competency in employee.competencies">
-                      <span class="col-xs-1" ng-show="!competency.$editing" ng-click="vmMatrix.resetEdit(vmMatrix.skillset.employees); competency.$editing = true; $parent.employee.$editing = true" ng-cloack>{{competency.score}}</span>
+                    <td ng-repeat="competency in vmMatrix.skillset.employees[0].competencies">
+                      <span class="col-xs-1" ng-show="!competency.$editing" ng-click="vmMatrix.resetEdit(vmMatrix.skillset.employees[0]); competency.$editing = true; $parent.employee.$editing = true" ng-cloack>{{competency.score}}</span>
                       <input class="form-control" ng-show="competency.$editing" ng-model="competency.score" ng-cloack />
                     </td>
                     <td ng-show="employee.$editing">
