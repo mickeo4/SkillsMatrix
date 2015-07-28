@@ -39,7 +39,7 @@
                       {{employee.name}}
                     </th>
                     <td ng-repeat="competency in employee.competencies">
-                      <span class="col-xs-1" ng-show="!competency.$editing" ng-click="vmMatrix.resetEdit(vmMatrix.skillset.employees); competency.$editing = true; $parent.employee.$editing = true" ng-cloack>{{competency.score}}</span>
+                      <span class="col-xs-1" ng-show="!competency.$editing" ng-click="vmMatrix.resetEdit(vmMatrix.skillset.employees); competency.$editing = true; employee.$editing = true" ng-style="{'background-color':vmMatrix.calculateCompetency(competency.score)}" ng-cloack>{{competency.score}}</span>
                       <input class="form-control" ng-show="competency.$editing" ng-model="competency.score" ng-cloack />
                     </td>
                     <td ng-show="employee.$editing">
@@ -53,17 +53,6 @@
         </div>
     </div>
 </div>
-
-<!-- <div class="col-lg-6 col-sm-12">
-<div class="panel panel-default">
-  <div class="panel-heading">Radar Chart</div>
-    <div class="panel-body">
-      <canvas id="radar" class="chart chart-radar" data="vm.data" labels="vm.labels"></canvas>
-    </div>
-</div>
-</div> -->
-
-
 
 
 <!-- <accordion close-others="oneAtATime">

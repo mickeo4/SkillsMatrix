@@ -6,6 +6,7 @@
         'ngTable',
         'skills',
         'matrix',
+        'matrixdetail',
         'competency'])
 
     // configure our routes
