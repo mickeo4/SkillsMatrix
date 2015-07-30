@@ -67,6 +67,13 @@
         }
     };
 
+// var i;
+//         for (i = 0; i < competencyKeys.length; ++i) {
+//             if(competencyKeys[i].value == score){
+//               return competencyKeys[i].keyStyle;
+//             }
+//         }
+
     // TODO: Inject competency service to load competency key data and cache data for future loads
     vm.calculateCompetency = function(score){
         var competencyKeys = [{id:1, value:0, title:"Stage 0", keyStyle:"white", skillsetid:1},
