@@ -55,15 +55,24 @@
     });
 
     vm.resetEdit = function (employees) {
-        for (var i = 0, len = employees.length; i < len; i++) {
+        var i;
+        var j;
+        for (i = 0; i < employees.length; i++) {
           var employee = employees[i];
           employee.$editing = false;
 
-          for (var j = 0, len = employee.competencies.length; j < len; j++){
+          for (j = 0; j < employee.competencies.length; j++){
               employee.competencies[j].$editing = false;
           }
         }
     };
+
+// var i;
+//         for (i = 0; i < competencyKeys.length; ++i) {
+//             if(competencyKeys[i].value == score){
+//               return competencyKeys[i].keyStyle;
+//             }
+//         }
 
     // TODO: Inject competency service to load competency key data and cache data for future loads
     vm.calculateCompetency = function(score){

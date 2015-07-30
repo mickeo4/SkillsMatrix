@@ -1,3 +1,4 @@
+
 body {
     padding-top: 50px;
     padding-bottom: 20px;
@@ -74,9 +75,9 @@ textarea {
 
 .table-header-rotated th.rotate-45{
   height: 80px;
-  width: 40px;
+  width: 50px;
   min-width: 40px;
-  max-width: 40px;
+  max-width: 50px;
   position: relative;
   vertical-align: bottom;
   padding: 0;
