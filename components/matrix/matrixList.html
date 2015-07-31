@@ -33,7 +33,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="employee in vmMatrix.skillset.employees | filter:vmMatrix.queryName | orderBy:orderProp">
+                  <tr ng-repeat="employee in vmMatrix.employees | filter:vmMatrix.queryName | orderBy:orderProp">
                     <th class="row-header">
                       <a href='./matrix/detail'><span class='glyphicon glyphicon-info-sign'></span></a>
                       {{employee.name}}
@@ -41,7 +41,7 @@
                     <td ng-repeat="competency in employee.competencies">
                       <span class="col-lg-1" 
                             ng-show="!competency.$editing" 
-                            ng-click="vmMatrix.resetEdit(vmMatrix.skillset.employees); competency.$editing = true; employee.$editing = true" 
+                            ng-click="vmMatrix.resetEdit(vmMatrix.employees); competency.$editing = true; employee.$editing = true" 
                             ng-style="{'background-color':vmMatrix.calculateCompetency(competency.score)}" 
                             ng-cloack>
                             {{competency.score}}
