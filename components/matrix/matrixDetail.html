@@ -9,6 +9,7 @@
           <h3 class="panel-title">Employee Competency</h3>
         </div>
         <div class="scrollable-table">
+          <form name="matrixDetailForm" novalidate>
           <table class="table table-hover table-striped table-responsive table-header-rotated">
             <thead>
               <tr>
@@ -25,7 +26,7 @@
             <tbody>
               <tr>
                 <th class="row-header">
-                   {{vmMatrixDetail.employee.name}}
+                  {{vmMatrixDetail.employee.name}}
                 </th>
                 <td ng-repeat="competency in vmMatrixDetail.employee.competencies">
                   <span class="col-lg-1" 
@@ -33,29 +34,46 @@
                         ng-click="vmMatrixDetail.resetEdit(vmMatrixDetail.employee); competency.$editing = true; vmMatrixDetail.employee.$editing = true;"
                         ng-style="{'background-color':vmMatrixDetail.calculateCompetency(competency.score)}" 
                         ng-cloack>
-                        {{competency.score}}
+                          {{competency.score}}
                   </span>
-                  <input class="form-control" ng-show="competency.$editing" ng-model="competency.score" ng-cloack/>
+                    <ng-form name="matrixDetailForm">
+                    <input  type="text"
+                            class="form-control"
+                            name="competencyScore"
+                            ng-show="competency.$editing" 
+                            ng-model="competency.score" 
+                            ng-blur="vmMatrixDetail.calculateRadarChart(
+                            vmMatrixDetail.employee.targetskillset.skills,vmMatrixDetail.employee.competencies, 
+                            vmMatrixDetail);"
+                            ng-cloack 
+                            required
+                            numbers-only="numbers-only"
+                            />
+                    <div ng-messages="matrixDetailForm.competencyScore.$error">
+                      <div ng-message="required">Score required</div>
+                    </div>
+                   </ng-form>
                 </td>
                 <td ng-show="vmMatrixDetail.employee.$editing">
                   <a href="" class="btn btn-primary btn-xs">Save</a>
                 </td>
-              </tr>
-            </tbody>
-          </table>
+            </tr>
+          </tbody>
+      </table>
+      </form>
+    </div>
+  </div>
+  <!-- Need to move this to its own controller and service and partial-->
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="panel panel-primary horizontal-spacer">
+        <div class="panel-heading">Competency Progress</div>
+        <div class="panel-body">
+          <canvas id="radar" class="chart chart-radar ng-isolate-scope" data="vmMatrixDetail.data" labels="vmMatrixDetail.labels"></canvas>
         </div>
       </div>
-      <!-- Need to move this to its own controller and service and partial-->
-      <div class="row">
-        <div class="col-lg-4">
-            <div class="panel panel-primary horizontal-spacer">
-              <div class="panel-heading">Competency Progress</div>
-              <div class="panel-body">
-                <canvas id="radar" class="chart chart-radar ng-isolate-scope" data="vmMatrixDetail.data" labels="vmMatrixDetail.labels"></canvas>
-              </div>
-            </div>
-          </div>
-      </div>
     </div>
-  </div>  
+  </div>
+</div>
+</div>  
 </div>

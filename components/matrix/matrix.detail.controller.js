@@ -8,29 +8,24 @@
     'employeeService', 
     'competencyKeyService', 
     'competencyService', 
-    'chart.js'])
+    'chart.js',
+    'chartsService',
+    'directivesModule'])
 
   .controller('MatrixDetailController', MatrixDetailController);
 
   MatrixDetailController.$inject = ['ngTableParams',
   'EmployeeService',
   'CompetencyKeyService',
-  'CompetencyService'];
+  'CompetencyService',
+  'ChartsService'];
 
-  function MatrixDetailController(ngTableParams, EmployeeService, CompetencyKeyService, CompetencyService){
+  function MatrixDetailController(ngTableParams, EmployeeService, CompetencyKeyService, CompetencyService, ChartsService){
     var vm = this;
 
     var employee = EmployeeService.getEmployee(1).employee;
 
     vm.employee = employee;
-
-    vm.labels = [];
-    vm.data = [[]];
-    for(var index = 0; index < vm.employee.targetskillset.skills.length; index++)
-    {
-       vm.labels.push(vm.employee.targetskillset.skills[index].name);
-       vm.data[0][index]= employee.competencies[index].score;
-    }
 
     vm.tableParams = new ngTableParams({
         page: 1,            // show first page
@@ -55,5 +50,9 @@
         var competencyKeys = CompetencyKeyService.getCompetencyKeys().competencyKeys;
         return CompetencyService.calculateCompetency(competencyKeys, score)
     };
+
+    // Wrap the charts service radar chart calculation and intialise
+    vm.calculateRadarChart = ChartsService.calculateRadarChart;
+    vm.calculateRadarChart(vm.employee.targetskillset.skills, vm.employee.competencies, vm);
   };
 })();
