@@ -12,8 +12,7 @@
 		.service('SkillsService', dataservice);
 
 
-	function dataservice(){
-
+	function dataservice($http, $q){
 		var service = {
         	getSkills: getSkills,
         	getSkill: getSkill
@@ -22,10 +21,15 @@
     	return service;
 
    		function getSkills(){
-			return{
-        		getAllSkills : true,
-            	skillsList : angular.fromJson(temp.skills),
-         	};
+   				return $http.get("http://localhost:9993/api/skills").then(function(response) {
+    					//console.log(data);
+          				return{
+            				getAllSkills : true,
+   							skillsList : response.data,
+            			}
+  					}, function(data) {
+    					return $q.reject('Oh no!');
+  				});		
 		}
 
 		function getSkill(id){

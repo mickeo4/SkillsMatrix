@@ -12,7 +12,11 @@
                		controllerAs: 'vm',
                 	resolve: {
             			skillsData : function(SkillsService){
-            				return SkillsService.getSkills();
+                            return SkillsService.getSkills().then(function(results) {
+                                return results;
+                                }, function(error) {
+                                return $q.reject('Oh no!');
+                            });
             			}
         			}
             	})

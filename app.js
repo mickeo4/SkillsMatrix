@@ -8,7 +8,8 @@
         'skills',
         'matrix',
         'matrixdetail',
-        'competency'])
+        'competency',
+        'ngLoadScript'])
 
     // configure our routes
     .config(function($routeProvider, $locationProvider) {
