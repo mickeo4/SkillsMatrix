@@ -1,0 +1,31 @@
+<div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <li class="sidebar-brand">
+            <a href="/">
+                Skills Matrix
+            </a>
+        </li>
+        <li>
+            <a href="matrix"><i class="fa fa-bar-chart"></i> Matrix</a>
+        </li>
+        <li>
+            <a href="skills"><i class="fa fa-shield"></i> Skills</a>
+        </li>
+        <li ng-controller="SearchController as vmSearch">
+            <div class="container">
+                <div class="row">
+                    <div id="custom-search-input">
+                        <div class="input-group col-lg-2">
+                            <input type="text" class="  search-query form-control" placeholder="Search Courses" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-danger" type="button" ng-click="vmSearch.search('C#')">
+                                    <span class=" glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

@@ -9,6 +9,7 @@
         'matrix',
         'matrixdetail',
         'competency',
+        'search',
         'ngLoadScript'])
 
     // configure our routes
@@ -38,5 +39,7 @@
     // create the controller and inject Angular's $scope
     .controller('mainController', function($scope) {
         // create a message to display in our view
-        $scope.message = 'Home of the Skills Matrix';
+        $scope.message = 'Home of the Skills Matrix'; // Naughty as it's on the root scope.
+        $scope.sidebar={};
+        $scope.sidebar.visible = false;
     });
